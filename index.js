@@ -207,10 +207,15 @@ const artists = [
 
 (1) Name of the first artist (0th index) in the array
 (2) Bio of the third artist (2nd index) in the array */
-
+console.log(artists[0].name)
+console.log(artists[2].bio)
 
 
 /* Task 2: There is a typo in your dataset 😱 The 9th artist, Vincent Van Gogh is currently Vincent Van Dough. Use an array method to fix this issue and console.log() to check your work. */
+
+
+artists[8].name = `Vincent Van Gogh`
+console.log(artists[8].name)
 
 
 
@@ -223,20 +228,46 @@ const artists = [
  * it will return `The artist at index 0 is Amedeo Modigliani`.
 */
 function getArtistByIndex(array, index) {
-    /* code here */
-  }
+
+  let artist = array[index]
+
+  return `The artist at index ${index} is ${artist.name} `
+
+}
+  
+console.log(getArtistByIndex(artists, 8))
   
   /**
 
 
 /* Task 4: Create a function called get20s() that takes data as an argument and returns an array with names of artists who were born in and died in 20th century (1900-2000) example born in 1901 and died in 1959 - included / born in 1889 and died in 1925 not included - should return ["Salvador Dali", "Frida Kahlo"]*/
 
-function get20s(/* Code here */){
+function get20s(data){
 
-  /* Code here */
+  let specificArtists = []
+
+  for (i in data) {
+
+    artist = data[i]
+
+    years = artist.years.split(` - `)
+
+    birth = parseInt(years[0])
+
+    death = parseInt(years[1])
+
+    if (birth >= 1900 && death <= 1999) {
+
+      specificArtists.push(artist.name)
+
+    }
+
+  }
+
+  return specificArtists
 
 }
-
+console.log(get20s(artists))
 
 /* Task 5: Create a function called `removeArtist` that takes two arguments:
  *     (1) artists array
@@ -248,11 +279,16 @@ function get20s(/* Code here */){
  * 
  * Note that sucessfully invoking this function multiple times without refreshing your browser will continuously remove artists from the array until there are none left. If you refresh your browser, the data will reset.  
 */
-function removeArtist(/*code here*/) {
-    /* code here */
-  }
+function removeArtist(array, index) {
   
- 
+  array.splice(index, 1)
+  
+  return array.length
+
+  }
+console.log(removeArtist(artists, 1))
+console.log(artists)
+
 
 /**
 /* Task 6: Create a function called `addArtist` that can accept an object of information and add it to the artists array. Then, add a 21st artist to the array (you) with custom information!👩‍🎨👨‍🎨
@@ -267,11 +303,23 @@ bio: Add 1-2 sentences (or use lorem ipsum)
 
 At the end, this function should return the new array with information added"*/
 
-function addArtist(/* Code here */){
+function addArtist(array,id, name, years, genre, nationality, bio){
 
-    /* Code here */
+  array.push(
+    {
+    id,
+    name,
+    years,
+    genre,
+    nationality,
+    bio
+    }
+  )
+  
+}
+addArtist(artists,artists.length+1, `Ant`, `Immortal`, `Whatver you can think of`, 'Dominican', 'My blood is 80% Jack Daniels. Hobbies include lunch and dinner.')
 
-  }
+console.log(artists[19])
 
 /* Task 7: Create a function called lotsOfArt() that takes one argument: 
 
@@ -281,11 +329,49 @@ and returns an array with names of artists who painted more than 100 paintings.
 
 For example lotsOfArt(artists); will return ["Amedeo Modigliani", "Rene Magritte", ..."Albrecht Dürer"]*/
 
-function lotsOfArt(/* Code here */){
 
-  /* Code here */
+function lotsOfArt(array) {
+  
+  const hundredPlusGang = []
 
+  for (let i = 0; i < array.length; i++){
+  
+    if (array[i].paintings >= 100) {
+    
+    hundredPlusGang.push(array[i].name)
+    }
+    
+  }
+  
+  return hundredPlusGang
+  
 }
+
+console.log(lotsOfArt(artists))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -301,7 +387,7 @@ In HTML, every artist and associated content uses the following structure:
     <img src="https://images.fineartamerica.com/images/artworkimages/mediumlarge/3/starry-night-by-vincent-van-gogh-vincent-van-gogh.jpg"/>
 </div>
 <div class = "name">
-   <a href="https://en.wikipedia.org/wiki/Vincent_van_Gogh"> Vincent Van Gogh</a>
+    <a href="https://en.wikipedia.org/wiki/Vincent_van_Gogh"> Vincent Van Gogh</a>
 </div>
 <div class = "bio">Vincent Willem van Gogh (Dutch: [ˈvɪnsɛnt ˈʋɪləm vɑŋ ˈɣɔx] (listen); 30 March 1853 – 29 July 1890) was a Dutch Post-Impressionist painter who is among the most famous and influential figures in the history of Western art. In just over a decade he created about 2,100 artworks, including around 860 oil paintings, most of them in the last two years of his life. They include landscapes, still lifes, portraits and self-portraits, and are characterised by bold colours and dramatic, impulsive and expressive brushwork that contributed to the foundations of modern art. However, he was not commercially successful, and his suicide at 37 followed years of mental illness and poverty.</div>
 </div>
