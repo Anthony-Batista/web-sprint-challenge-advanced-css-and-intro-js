@@ -242,12 +242,32 @@ console.log(getArtistByIndex(artists, 8))
 
 /* Task 4: Create a function called get20s() that takes data as an argument and returns an array with names of artists who were born in and died in 20th century (1900-2000) example born in 1901 and died in 1959 - included / born in 1889 and died in 1925 not included - should return ["Salvador Dali", "Frida Kahlo"]*/
 
-function get20s(/* Code here */){
+function get20s(data){
 
-  /* Code here */
+  let specificArtists = []
+
+  for (i in data) {
+
+    artist = data[i]
+
+    years = artist.years.split(` - `)
+
+    birth = parseInt(years[0])
+
+    death = parseInt(years[1])
+
+    if (birth >= 1900 && death <= 1999) {
+
+      specificArtists.push(artist.name)
+
+    }
+
+  }
+
+  return specificArtists
 
 }
-
+console.log(get20s(artists))
 
 /* Task 5: Create a function called `removeArtist` that takes two arguments:
  *     (1) artists array
@@ -260,12 +280,14 @@ function get20s(/* Code here */){
  * Note that sucessfully invoking this function multiple times without refreshing your browser will continuously remove artists from the array until there are none left. If you refresh your browser, the data will reset.  
 */
 function removeArtist(array, index) {
-  // let index
-
-
+  
+  array.splice(index, 1)
+  
+  return array.length
 
   }
-  
+console.log(removeArtist(artists, 1))
+console.log(artists)
 
 
 /**
@@ -281,10 +303,11 @@ bio: Add 1-2 sentences (or use lorem ipsum)
 
 At the end, this function should return the new array with information added"*/
 
-function addArtist(array, name, years, genre, nationality, bio){
+function addArtist(array,id, name, years, genre, nationality, bio){
 
   array.push(
     {
+    id,
     name,
     years,
     genre,
@@ -294,9 +317,9 @@ function addArtist(array, name, years, genre, nationality, bio){
   )
   
 }
-addArtist(artists, `Ant`, `Immortal`, `Whatver you can think of`, 'Dominican', 'My blood is 80% Jack Daniels')
+addArtist(artists,artists.length+1, `Ant`, `Immortal`, `Whatver you can think of`, 'Dominican', 'My blood is 80% Jack Daniels. Hobbies include lunch and dinner.')
 
-console.log(artists[20])
+console.log(artists[19])
 
 /* Task 7: Create a function called lotsOfArt() that takes one argument: 
 
